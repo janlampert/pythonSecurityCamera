@@ -1,8 +1,6 @@
 import cv2
 import time
 import datetime
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 #import os
 
 cap = cv2.VideoCapture(1)
@@ -24,11 +22,6 @@ recording = False
 recording_stopped_time = None
 timer_started = False
 
-#save video to google drive
-def saveToCloud(out):
-
-
-
 while True:
     _, frame = cap.read()
 
@@ -48,7 +41,7 @@ while True:
             date = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             out = cv2.VideoWriter((date + ".mp4"), fourcc, 10.0, framesize)
             recording = True
-            print ("Aufnahme erfolgreich gestartet!")
+            print ("Recording started!")
 
     elif recording:
         if timer_started:
@@ -56,7 +49,7 @@ while True:
                     recording = False
                     timer_started = False
                     out.release()
-                    print("Aufnahme wurde abgebrochen!")
+                    print("Stopped recording!")
         else:
             timer_started = True
             recording_stopped_time = time.time()
@@ -64,7 +57,7 @@ while True:
     if recording:
         out.write(frame)
 
-    cv2.imshow("Ueberwachungskamera", frame)
+    cv2.imshow("Securitycamera", frame)
 
     if cv2.waitKey(1) == ord("q"):
         break

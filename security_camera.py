@@ -7,7 +7,6 @@ cap = cv2.VideoCapture(1)
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-#Video Voraussetzungen
 framesize = (int(cap.get(3)), int(cap.get(4)))
 fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 
@@ -28,7 +27,8 @@ while True:
     #Gesicht(er) erkennen
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade.detectMultiScale(gray, 1.1, 3)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 3)#Y
+   
 
     for (x, y, width, height) in faces:
         cv2.rectangle(frame, (x, y), (x+width, y + height), (255, 0, 0), 3)
